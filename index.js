@@ -1,6 +1,12 @@
 const fetch = require('./src/api');
 const {fetchApi, gretings} = fetch
 
-//fetchApi('https://rickandmortyapi.com/api/character')
-gretings()
+//gretings()
+
+fetchApi('https://rickandmortyapi.com/api/character')
+.then((res)=>
+     {
+        const results = res.results
+     })
+
 
