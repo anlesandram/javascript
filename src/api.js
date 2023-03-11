@@ -9,4 +9,8 @@ const fetchApi = async(url) =>{
     }
 }
 
-module.exports=fetchApi
+const gretings = () => {
+    console.log("hola mundo")
+}
+
+module.exports = {fetchApi,gretings}

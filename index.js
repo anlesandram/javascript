@@ -1,5 +1,6 @@
-const fetchApi = require('./src/api');
+const fetch = require('./src/api');
+const {fetchApi, gretings} = fetch
 
-fetchApi('https://rickandmortyapi.com/api/character')
-
+//fetchApi('https://rickandmortyapi.com/api/character')
+gretings()
 
