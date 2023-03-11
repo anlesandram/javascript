@@ -13,6 +13,7 @@
   "author": "Angela",
   "license": "ISC",
   "dependencies": {
-    "is-odd": "^3.0.1"
+    "is-odd": "^3.0.1",
+    "node-fecth": "^0.0.1-security"
   }
 }
