@@ -12,6 +12,7 @@ The application is used to manage different products.
 ### Endpoints 
 
 #### Return List of Products
+<img src="/lab/img/GET_PRODUCT_FLOW.png"/>
 The endpoint returns the list of available products
 ```
 curl --location 'http://localhost:8000/api/v1/products/'
@@ -20,6 +21,8 @@ curl --location 'http://localhost:8000/api/v1/products/'
 
 #### Add new product
 The endpoint create a new product
+<img src="/lab/img/CREATE_PRODUCT_FLOW.png"/>
+
 ```
 curl --location 'http://localhost:8000/api/v1/products' \
 --header 'Content-Type: application/json' \
@@ -51,6 +54,7 @@ curl --location --request PATCH 'http://localhost:8000/api/v1/products/192660bf-
 
 
 #### Delete product
+<img src="/lab/img/DELETE_PRODUCT_FLOW.png"/>
 The endpoint remove an specific product
 ```
 curl --location --request DELETE 'http://localhost:8000/api/v1/products/192660bf-5e99-49da-ac0e-5e68c4ca22c6'
