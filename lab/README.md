@@ -16,7 +16,7 @@ The endpoint returns the list of available products
 ```
 curl --location 'http://localhost:8000/api/v1/products/'
 ```
-<img src="/lab/img/GET_PRODUCT.PNG"/>
+<img src="/lab/img/GET_PRODUCT.png"/>
 
 #### Add new product
 The endpoint create a new product
