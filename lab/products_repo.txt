@@ -1,2 +1,1 @@
-{"id":1,"name":"sombrero","description":"test","price":2000,"quantity":"3","category":"test"}
-{"id":2,"name":"sombrero","description":"test","price":2000,"quantity":"3","category":"test"}
+{"id":"29b4787e-5f34-4aa5-9e63-bccce702f129","name":"bolso","description":"test","price":5000,"category":"test","quantity":"test"}
