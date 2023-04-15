@@ -2,9 +2,22 @@
 const fs = require('fs');
 const path = require('path');
 const express = require("express")
+const Joi = require('joi');
+
 const port = 8000;
 const app = express();
+
 app.use(express.json())
+
+
+const productScheme = Joi.object({
+    name: Joi.string().required(),
+    description: Joi.string().required(),
+    price: Joi.number().required(),
+    quantity: Joi.string().required(),
+    category: Joi.string().required(),
+  });
+
 
 
 const filePath = path.resolve(`${__dirname}/products_repo.txt`)
@@ -52,18 +65,23 @@ app.get("/api/v1/products", (req, res) => {
 //Add Product
 app.post("/api/v1/products", (req, res, next) => {
     let body = req.body;
+    const { error, value } =  productScheme.validate(body);
 
-    var newProduct = body;
-    var index = products.length + 1;
-    newProduct = { id: index, ...newProduct }
-
+    if (error) {
+        next(new Error(error));
+      } else {
+        var newProduct = body;
+        var index = products.length + 1;
+        newProduct = { id: index, ...newProduct }
     
-    products.push(newProduct);
-    addProductRepo(newProduct);
-
-    const product = products.slice(-1);
-
-    res.json(product);
+        
+        products.push(newProduct);
+        addProductRepo(newProduct);
+    
+        const product = products.slice(-1);
+    
+        res.json(product);
+      }
 });
 
 
