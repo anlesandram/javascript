@@ -1,24 +1,24 @@
 # Steady Ready Go !!
 
-##Run Application
+## Run Application
 
 ```
 npm run server.js
 ```
 
-##Description
+## Description
 The application is used to manage different products.
 
-###Endpoints 
+### Endpoints 
 
-####Return List of Products
+#### Return List of Products
 The endpoint returns the list of available products
 ```
 curl --location 'http://localhost:8000/api/v1/products/'
 ```
 <img src="/images/GET_PRODUCT.PNG"/>
 
-####Add new product
+#### Add new product
 The endpoint create a new product
 ```
 curl --location 'http://localhost:8000/api/v1/products' \
@@ -34,7 +34,7 @@ curl --location 'http://localhost:8000/api/v1/products' \
 <img src="/images/CREATE_PRODUCT.png"/>
 
 
-####Modify product
+#### Modify product
 The endpoint modify an specific product
 ```
 curl --location --request PATCH 'http://localhost:8000/api/v1/products/192660bf-5e99-49da-ac0e-5e68c4ca22c6' \
@@ -50,7 +50,7 @@ curl --location --request PATCH 'http://localhost:8000/api/v1/products/192660bf-
 <img src="/images/MODIFY_PRODUCT.png"/>
 
 
-####Delete product
+#### Delete product
 The endpoint remove an specific product
 ```
 curl --location --request DELETE 'http://localhost:8000/api/v1/products/192660bf-5e99-49da-ac0e-5e68c4ca22c6'
