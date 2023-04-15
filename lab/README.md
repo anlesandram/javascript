@@ -20,9 +20,8 @@ curl --location 'http://localhost:8000/api/v1/products/'
 <img src="/lab/img/GET_PRODUCT.png"/>
 
 #### Add new product
-The endpoint create a new product
 <img src="/lab/img/CREATE_PRODUCT_FLOW.png"/>
-
+The endpoint create a new product
 ```
 curl --location 'http://localhost:8000/api/v1/products' \
 --header 'Content-Type: application/json' \
