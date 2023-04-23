@@ -1,5 +1,5 @@
 const repository = require('../repositories/product.repository')
-const {NotFoundError} = require('../middlewares/custom.exception').errorMappers
+const {NotFoundError} = require('../mappers/custom.exception').errorMappers
 
 exports.readProducts = async () => {
     return await repository.readElements();

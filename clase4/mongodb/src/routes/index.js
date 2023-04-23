@@ -1,7 +1,7 @@
 const { Router } = require("express")
 const router = Router()
 const controller = require('../controllers/controller')
-const {middleware} = require('../middlewares/handlers')
+const middlewares = require('../middlewares/product.validations')
 const schemes = require('../models/product.scheme')
 
 const BASE = "/api/v1/products"
@@ -11,11 +11,11 @@ router
 
 router.route(BASE)
     .get(controller.getProducts)
-    .post(middleware(schemes.productScheme), controller.createProduct)
+    .post(middlewares.validateBody(schemes.productBody), controller.createProduct)
 
 router.route(BASE + "/:productId")
     .delete(controller.deleteProduct)
-    .patch(middleware(schemes.productScheme), controller.updateProduct)
+    .patch(middlewares.validateBody(schemes.productBody), controller.updateProduct)
 
 module.exports = router;
 
