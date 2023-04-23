@@ -1,1 +1,1 @@
-{"id":"29b4787e-5f34-4aa5-9e63-bccce702f129","name":"bolso","description":"test","price":5000,"category":"test","quantity":"test"}
+{"id":"1460d656-804f-45cd-92bd-ccec2bbb8afb","name":"camiseta","description":"test","price":10000,"category":"test","quantity":5}
