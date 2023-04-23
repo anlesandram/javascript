@@ -1,4 +1,4 @@
-const repository = require('./repository');
+const repository = require('../repositories/product.repository');
 
 exports.readProducts = async () => {
     return await repository.readElements();

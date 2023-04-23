@@ -1,4 +1,4 @@
-const { Product } = require("./models")
+const { Product } = require("../models/products")
 
 exports.readElements = async () => {
     return await Product.find()

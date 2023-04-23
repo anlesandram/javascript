@@ -1,4 +1,4 @@
-const transaction = require('./transaction');
+const transaction = require('../util/transaction');
 
 
 exports.getProducts = async (_, res, next) => {

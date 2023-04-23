@@ -2,7 +2,7 @@ require("dotenv").config()
 require("express-async-errors");
 const express = require("express")
 const moongose = require("mongoose")
-const handlers = require('./handlers');
+const handlers = require('./middlewares/handlers');
 
 const app = express();
 
