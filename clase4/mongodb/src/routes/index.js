@@ -1,8 +1,8 @@
 const { Router } = require("express")
-const router = Router();
-const controller = require('../controllers/controller');
-const {middleware} = require('../middlewares/handlers');
-const schemes = require('../models/product.scheme');
+const router = Router()
+const controller = require('../controllers/controller')
+const {middleware} = require('../middlewares/handlers')
+const schemes = require('../models/product.scheme')
 
 const BASE = "/api/v1/products"
 

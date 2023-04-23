@@ -2,7 +2,7 @@ exports.errorLogger = (err, req, res, next) => {
     next(err);
 }
 
-exports.badRequesterrorHandler = (err, req, res, next) => {
+exports.errorHandler = (err, req, res, next) => {
     res.status(400).json({
         message: err.message,
     })
