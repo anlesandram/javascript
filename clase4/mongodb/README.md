@@ -4,50 +4,41 @@
 ## Commands
 
 ### Show databases
-<img src="/lab/img/GET_PRODUCT_FLOW.png"/>
-The command returns the list of databases
 ```
 show dbs
 ```
 <img src="/clase4/mongodb/assets/show_database.PNG"/>
 
-### Select specific database
-<img src="/lab/img/CREATE_PRODUCT_FLOW.png"/>
-The endpoint create a new product
+### Use databases
 ```
-curl --location 'http://localhost:8000/api/v1/products' \
---header 'Content-Type: application/json' \
---data '    {
-        "name": "camiseta",
-        "description": "test",
-        "price": 10000,
-        "category":"test",
-        "quantity":"test"
-    }'
+use name_database
 ```
-<img src="/lab/img/CREATE_PRODUCT.png"/>
+<img src="/clase4/mongodb/assets/use_database.PNG"/>
 
 
-### Modify product
-The endpoint modify an specific product
+### Show all elements in collection
 ```
-curl --location --request PATCH 'http://localhost:8000/api/v1/products/192660bf-5e99-49da-ac0e-5e68c4ca22c6' \
---header 'Content-Type: application/json' \
---data '    {
-        "name": "buzo",
-        "description": "test",
-        "price": 2000,
-        "category":"test",
-        "quantity":"test"
-    }'
+db.product.find()
 ```
-<img src="/lab/img/MODIFY_PRODUCT.png"/>
+<img src="/clase4/mongodb/assets/find_all_items_collection.PNG"/>
 
 
-### Delete product
-<img src="/lab/img/DELETE_PRODUCT_FLOW.png"/>
-The endpoint remove an specific product
+### Insert one element in the collection
 ```
-curl --location --request DELETE 'http://localhost:8000/api/v1/products/192660bf-5e99-49da-ac0e-5e68c4ca22c6'
+db.product.insertOne({name:"dashboard",description:"dashboard black",price:10000,category:"office",quantity:10})
 ```
-<img src="/lab/img/DELETE_PRODUCT.png"/>
+<img src="/clase4/mongodb/assets/insert_one_element.PNG"/>
+
+
+### Update element in the collection
+```
+ db.product.update({_id: ObjectId("644c83134dbe1435966c12ab")},{$set : {description: "shoes"}})
+```
+<img src="/clase4/mongodb/assets/update_element.PNG"/>
+
+
+### Delete one element in the collection
+```
+ db.product.update({_id: ObjectId("644c83134dbe1435966c12ab")},{$set : {description: "shoes"}})
+```
+<img src="/clase4/mongodb/assets/delete_one_element.PNG"/>
