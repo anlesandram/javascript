@@ -39,6 +39,6 @@ db.product.insertOne({name:"dashboard",description:"dashboard black",price:10000
 
 ### Delete one element in the collection
 ```
- db.product.update({_id: ObjectId("644c83134dbe1435966c12ab")},{$set : {description: "shoes"}})
+ db.product.deleteOne({_id: ObjectId("644c888f4dbe1435966c12ad")})
 ```
 <img src="/clase4/mongodb/assets/delete_one_element.png"/>
