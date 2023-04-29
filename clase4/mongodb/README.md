@@ -7,7 +7,7 @@
 ```
 show dbs
 ```
-<img src="assets/show_database.PNG"/>
+<img src="mongodb/assets/show_database.PNG"/>
 
 ### Use databases
 ```
