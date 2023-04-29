@@ -9,6 +9,7 @@ show dbs
 ```
 <img src="/clase4/mongodb/assets/show_databses.png"/>
 
+
 ### Use databases
 ```
 use name_database
