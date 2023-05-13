@@ -4,8 +4,9 @@ const userController = require('../controllers/user')
 const productController = require('../controllers/product')
 
 
-const middlewares = require('../middlewares/product.validations')
-const schemes = require('../models/product.scheme')
+const middlewares = require('../middlewares/validations')
+const productScheme = require('../models/product.scheme')
+const userScheme = require('../models/user.scheme')
 
 const BASE_PRODUCTS = "/api/v1/products"
 const BASE_USERS = "/api/v1/users"
@@ -15,19 +16,19 @@ router
 
 router.route(BASE_PRODUCTS)
     .get(productController.getProducts)
-    .post(middlewares.validateBody(schemes.productBody), productController.createProduct)
+    .post(middlewares.validateBody(productScheme.productBody), productController.createProduct)
 
 router.route(BASE_PRODUCTS + "/:productId")
     .delete(productController.deleteProduct)
-    .patch(middlewares.validateBody(schemes.productBody), productController.updateProduct)
+    .patch(middlewares.validateBody(productScheme.productBody), productController.updateProduct)
 
 router.route(BASE_USERS)
     .get(userController.getUsers)
-    .post(userController.createUser)
+    .post(middlewares.validateBody(userScheme.userBody), userController.createUser)
 
 router.route(BASE_USERS + "/:userId")
     .delete(userController.deleteUser)
-    .patch( userController.updateUser)
+    .patch(middlewares.validateBody(userScheme.userBody), userController.updateUser)
 
 module.exports = router;
 
