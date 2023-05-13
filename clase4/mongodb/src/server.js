@@ -10,11 +10,12 @@ app.use(express.json())
 app.use("/", require("./routes"))
 app.use(handlers.errorLogger)
 app.use(handlers.errorHandler)
-
+const dbInstance = require("./config/postgresql");
 
 const port = process.env.PORT || 8000;
 const start = async () => {
     try {
+        await dbInstance.sync()
         await moongose.connect(process.env.MONGODB_CONNECTION, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
