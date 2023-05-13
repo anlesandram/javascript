@@ -1,52 +1,108 @@
-# Mongo Shell Lab
+# PostgreSQL Lab
 
 
 ## Commands
 
-### Show databases
+### Crate database 
 ```
-show dbs
+CREATE DATABASE productos;
 ```
-<img src="/clase4/mongodb/assets/show_databses.png"/>
+
+### Create table
+```
+CREATE TABLE productos (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  descripcion TEXT,
+  precio DECIMAL(10, 2) NOT NULL,
+  inventario INTEGER NOT NULL
+);
+```
+
+### Select all elements
+```
+select * from productos
+```
+
+**Schema (MySQL v5.7)**
+
+    CREATE TABLE productos (
+      id SERIAL PRIMARY KEY,
+      nombre VARCHAR(100) NOT NULL,
+      descripcion TEXT,
+      precio DECIMAL(10, 2) NOT NULL,
+      inventario INTEGER NOT NULL
+    );
+    INSERT INTO productos (nombre, descripcion, precio, inventario)
+    VALUES ('Producto 1', 'Descripción del producto 1', 10.99, 100),
+           ('Producto 2', 'Descripción del producto 2', 19.99, 50),
+           ('Producto 3', 'Descripción del producto 3', 5.99, 200);
+
+---
+
+**Query #1**
+
+    select * from productos;
+
+| id  | nombre     | descripcion                | precio | inventario |
+| --- | ---------- | -------------------------- | ------ | ---------- |
+| 1   | Producto 1 | Descripción del producto 1 | 10.99  | 100        |
+| 2   | Producto 2 | Descripción del producto 2 | 19.99  | 50         |
+| 3   | Producto 3 | Descripción del producto 3 | 5.99   | 200        |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/)
 
 
-### Use database
+### Select element 
 ```
-use name_database
+select * from productos  where nombre = 'Producto 1'
 ```
-<img src="/clase4/mongodb/assets/use_database.png"/>
+**Schema (MySQL v5.7)**
+
+    CREATE DATABASE productos;
+    CREATE TABLE productos (
+      id SERIAL PRIMARY KEY,
+      nombre VARCHAR(100) NOT NULL,
+      descripcion TEXT,
+      precio DECIMAL(10, 2) NOT NULL,
+      inventario INTEGER NOT NULL
+    );
+    INSERT INTO productos (nombre, descripcion, precio, inventario)
+    VALUES ('Producto 1', 'Descripción del producto 1', 10.99, 100),
+           ('Producto 2', 'Descripción del producto 2', 19.99, 50),
+           ('Producto 3', 'Descripción del producto 3', 5.99, 200);
+
+---
+
+**Query #1**
+
+    select * from productos  where nombre = 'Producto 1';
+
+| id  | nombre     | descripcion                | precio | inventario |
+| --- | ---------- | -------------------------- | ------ | ---------- |
+| 1   | Producto 1 | Descripción del producto 1 | 10.99  | 100        |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/)
 
 
-### Show collection
+### Insert element 
 ```
-show collections
+INSERT INTO productos (nombre, descripcion, precio, inventario)
+VALUES ('Producto 1', 'Descripción del producto 1', 10.99, 100),
+       ('Producto 2', 'Descripción del producto 2', 19.99, 50),
+       ('Producto 3', 'Descripción del producto 3', 5.99, 200);
 ```
-<img src="/clase4/mongodb/assets/show_collections.png"/>
-
-
-### Show all elements in collection
-```
-db.product.find()
-```
-<img src="/clase4/mongodb/assets/find_all_items_collection.png"/>
-
-
-### Insert one element in the collection
-```
-db.product.insertOne({name:"dashboard",description:"dashboard black",price:10000,category:"office",quantity:10})
-```
-<img src="/clase4/mongodb/assets/insert_one_element.png"/>
-
 
 ### Update element in the collection
 ```
- db.product.update({_id: ObjectId("644c83134dbe1435966c12ab")},{$set : {description: "shoes"}})
+update productos set nombre='test productos' where id=1
 ```
-<img src="/clase4/mongodb/assets/update_element.png"/>
 
-
-### Delete one element in the collection
+### Delete element
 ```
- db.product.deleteOne({_id: ObjectId("644c888f4dbe1435966c12ad")})
+ delete  from productos p where id=1
 ```
-<img src="/clase4/mongodb/assets/delete_one_element.png"/>
