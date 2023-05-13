@@ -1,4 +1,4 @@
-const transaction = require('../util/transaction');
+const transaction = require('../transaction/product');
 const httpStatus = require('http-status-codes')
 const {StatusCodes} = httpStatus
 
@@ -32,3 +32,4 @@ exports.deleteProduct = async (req, res, next) => {
     
     res.status(StatusCodes.OK).json(productRemoved)
 };
+ 

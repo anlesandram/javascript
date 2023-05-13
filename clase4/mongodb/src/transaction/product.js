@@ -1,4 +1,4 @@
-const repository = require('../repositories/product.repository')
+const repository = require('../repositories/product')
 const {NotFoundError} = require('../mappers/custom.exception').errorMappers
 
 exports.readProducts = async () => {
