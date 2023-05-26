@@ -2,7 +2,8 @@ const { Router } = require("express")
 const router = Router()
 const userController = require('../controllers/user')
 const productController = require('../controllers/product')
-
+const { login, restrictedView } = require("../controllers/authController");
+const { isAuth } = require("../middlewares/handlers");
 
 const middlewares = require('../middlewares/validations')
 const productScheme = require('../models/product.scheme')
@@ -13,6 +14,10 @@ const BASE_USERS = "/api/v1/users"
 
 router
     .get("/health", (_, res) => res.send("check"))
+
+router
+    .post("/login", login)
+    .get("/auth/confidential", isAuth, restrictedView)
 
 router.route(BASE_PRODUCTS)
     .get(productController.getProducts)
