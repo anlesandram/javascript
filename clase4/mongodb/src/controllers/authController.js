@@ -1,23 +1,20 @@
 const jwt = require("jsonwebtoken");
+const transaction = require('../transaction/user');
+const httpStatus = require('http-status-codes')
+const {StatusCodes} = httpStatus
 
-exports.login = (req, res) => {
-
-  const { email } = req.body; 
+exports.login = async (req, res) => {
+  const { username, password } = req.body;
+  const user = await transaction.getUser(username, password)
 
   token = jwt.sign(
-    { email },
+    { user },
     process.env.JWT_SECRET_KEY,
     { expiresIn: "1d" }
   )
-
-  res
-        .status(200)
-        .json({
-        success: true,
-        data: {
-            token,
-        },
-        });
+    console.log(user)
+    console.log(user.username)
+  res.json({token, email: user.username, name: user.firstName}).status(StatusCodes.OK);
 
 };
 

@@ -5,9 +5,12 @@ exports.readElements = async () => {
 
 }
 
-exports.readElement = async (id) => {
-    return await User.findByPk(id)
+exports.readElementUserId = async (userId) => {
+    return await User.findByPk(userId)
+}
 
+exports.readElement = async (username, password) => {
+    return await User.findOne({where: { username, password: password }});
 }
 
 exports.insertElement = async (data) => {

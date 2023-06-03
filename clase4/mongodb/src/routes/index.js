@@ -8,15 +8,26 @@ const { isAuth } = require("../middlewares/handlers");
 const middlewares = require('../middlewares/validations')
 const productScheme = require('../models/product.scheme')
 const userScheme = require('../models/user.scheme')
+const path = require("path");
 
 const BASE_PRODUCTS = "/api/v1/products"
 const BASE_USERS = "/api/v1/users"
+
+
+router.get("/login", (req, res) => {
+    res.sendFile(path.resolve("src/views/login.html"));
+});
+
+
+router.get("/playground", (req, res) => {
+    res.sendFile(path.resolve("src/views/playground.html"));
+});
 
 router
     .get("/health", (_, res) => res.send("check"))
 
 router
-    .post("/login", login)
+    .post("/auth/login", login)
     .get("/auth/confidential", isAuth, restrictedView)
 
 router.route(BASE_PRODUCTS)
