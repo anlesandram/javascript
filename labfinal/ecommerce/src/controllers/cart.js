@@ -24,7 +24,7 @@ exports.updateCartItems = async (req, res, next) => {
 
 exports.deleteCart = async (req, res, next) => {
     const { cartId } = req.params;
-    const cart = await transaction.deleteOrder(cartId);
+    const cart = await transaction.deleteCart(cartId);
 
-    res.status(StatusCodes.OK).json(`Order ${cartId} was removed`)
+    res.status(StatusCodes.OK).json(`Cart ${cartId} was removed`)
 };

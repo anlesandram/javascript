@@ -5,12 +5,13 @@ const { NotFoundError } = require('../mappers/custom.exception').errorMappers
 
 
 exports.updateCartItems = async (cartId, newCart) => {
-    //validate if cart Id exists ann if it has items
-    cart = await this.retrieveCart(cartId)
 
     for (const item of newCart.items) {
-        //validate if product exist and quantity
-        product = await productTransaction.retrieveProduct(item.productId)
+        //Validate if cart exist
+        let cart = await this.retrieveCart(cartId)
+
+        //validate if product exist
+        let product = await productTransaction.retrieveProduct(item.productId)
 
         //validate quantity
         if (item.quantity > product.availableUnits) {
@@ -36,8 +37,8 @@ exports.createCart = async () => {
 }
 
 exports.deleteCart = async (cartId) => {
-    const cart = retrieveCart(cartId);
-    return repository.deleteElement(orderId);
+    const cart = await this.retrieveCart(cartId);
+    return repository.deleteElement(cartId);
 }
 
 
