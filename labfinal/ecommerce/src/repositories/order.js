@@ -17,5 +17,17 @@ exports.insertElement = async (data) => {
 
 
 exports.deleteElement = async (id) => {
-    return await Product.findByIdAndRemove(id, { new: true })
+    return await Order.findByIdAndRemove(id, { new: true })
+}
+
+
+exports.updateOrderPaymentInfo = async(orderId, paymentId) => {
+    return Order.updateOne(
+        { _id: orderId },
+        {
+            $set: {
+                "paymentId": paymentId
+            }
+        }
+    )
 }

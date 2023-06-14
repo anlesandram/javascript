@@ -7,5 +7,5 @@ exports.makePayment = async (req, res, next) => {
     const body = req.body;
 
     const payment = await transaction.makePayment(body)
-    res.status(StatusCodes.OK).json(payment.status)
+    res.status(StatusCodes.OK).json()
 }

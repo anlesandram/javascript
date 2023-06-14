@@ -22,3 +22,7 @@ exports.deleteOrder = async (req, res, next) => {
     res.status(StatusCodes.OK).json( `Order ${order.id} was removed`)
 };
  
+exports.getOrders = async (_, res, next) => {
+    const orders = await transaction.readOrders()
+    res.status(StatusCodes.OK).json(orders)
+}

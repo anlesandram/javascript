@@ -3,7 +3,6 @@ const productTransaction = require('../transaction/product')
 const { NotFoundError } = require('../mappers/custom.exception').errorMappers
 
 
-
 exports.updateCartItems = async (cartId, newCart) => {
 
     for (const item of newCart.items) {
@@ -18,11 +17,18 @@ exports.updateCartItems = async (cartId, newCart) => {
             throw new NotFoundError("Not units available");
         }
 
+        let newItem = {
+            "productId": item.productId,
+            "quantity": item.quantity,
+            "totalPriceProduct": product.price * item.quantity
+        }
+
         //Update Cart items
         if (cart.items.findIndex(i => i.productId === item.productId) !== -1) {
-            repository.updateCartItems(cartId, item)
+           
+            repository.updateCartItems(cartId, newItem)
         } else {
-            repository.addCartItems(cartId, item)
+            repository.addCartItems(cartId, newItem)
         }
     }
 }

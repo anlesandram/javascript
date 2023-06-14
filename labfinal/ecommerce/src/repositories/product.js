@@ -8,7 +8,7 @@ exports.readElements = async () => {
 exports.readElement = async (idElement) => {
     return await Product.find({
         _id: idElement
-      })
+    })
 
 }
 
@@ -17,9 +17,22 @@ exports.insertElement = async (data) => {
 }
 
 exports.updateElement = async (data, id) => {
-   return await Product.findByIdAndUpdate(id, data, {new: true});
+    return await Product.findByIdAndUpdate(id, data, { new: true });
 }
 
 exports.deleteElement = async (id) => {
-    return await Product.findByIdAndRemove(id, {new: true});
+    return await Product.findByIdAndRemove(id, { new: true });
+}
+
+
+exports.updateProductQuantity = async (productId, quantity) => {
+    console.log(productId+ " "+ quantity)
+    return await Product.updateOne(
+        { _id: productId },
+        {
+            $set: {
+                "quantity":  quantity
+            }
+        }
+    )
 }
