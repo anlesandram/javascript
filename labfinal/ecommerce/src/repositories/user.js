@@ -1,7 +1,26 @@
 const { User } = require("./schemes/users");
 
-exports.readElements = async () => {
+exports.readElements = async (limit, page) => {
     return await User.find()
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .exec();
+}
+
+exports.readElementsByName = async (limit, page, sortCritteria, itemName) => {
+    const sort = sortCritteria == "desc" ? "-firstName" : "firstName"
+
+    return await User.find(
+        { 'firstName': { $regex: itemName, $options: 'i' } }
+    )
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .sort(sort)
+        .exec();
+}
+
+exports.countElements = async () => {
+    return User.count()
 }
 
 exports.readElementUserId = async (userId) => {

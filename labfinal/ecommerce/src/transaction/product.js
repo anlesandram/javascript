@@ -1,8 +1,14 @@
 const repository = require('../repositories/product')
-const {NotFoundError} = require('../mappers/custom.exception').errorMappers
+const { NotFoundError } = require('../mappers/custom.exception').errorMappers
 
-exports.readProducts = async () => {
-    return await repository.readElements();
+exports.readElements = async (limit, page, sortCritteria, itemName) => {
+    return !itemName ?
+        await repository.readElements(limit, page, sortCritteria) :
+        await repository.readElementsByName(limit, page, sortCritteria, itemName)
+}
+
+exports.countElements = async () => {
+    return await repository.countProducts()
 }
 
 exports.createProduct = async (newProduct) => {
@@ -40,5 +46,5 @@ exports.updateProductQuantity = async (items) => {
 
         await repository.updateProductQuantity(productId, calculateQuantity)
     }
- 
+
 } 

@@ -1,8 +1,14 @@
 const { Cart } = require("./schemes/cart")
 
-exports.readElements = async () => {
+exports.readElements = async (limit, page) => {
     return await Cart.find()
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .exec();
+}
 
+exports.countElements = async () => {
+    return Cart.count()
 }
 
 exports.readElement = async (idElement) => {

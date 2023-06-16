@@ -2,9 +2,6 @@ const repository = require('../repositories/order')
 const cartTransaction = require('../transaction/cart')
 const {NotFoundError} = require('../mappers/custom.exception').errorMappers
 
-exports.readOrders = async () => {
-    return await repository.readElements();
-}
 
 exports.createOrder = async (order, userId) => {
     //validate cart Id
@@ -56,4 +53,12 @@ exports.getOrderByUserId = async (orderId, userId) => {
     }
 
     return order[0]
+}
+
+exports.readElements = async (limit, page, sortCritteria, itemName) => {
+    return await repository.readElements(limit, page, sortCritteria) 
+}
+
+exports.countElements = async () => {
+    return await repository.countElements()
 }

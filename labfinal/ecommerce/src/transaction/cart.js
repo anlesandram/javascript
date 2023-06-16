@@ -33,10 +33,13 @@ exports.updateCartItems = async (cartId, newCart) => {
     }
 }
 
-exports.readCarts = async () => {
-    return await repository.readElements();
+exports.readElements = async (limit, page, sortCritteria, itemName) => {
+    return await repository.readElements(limit, page, sortCritteria) 
 }
 
+exports.countElements = async () => {
+    return await repository.countElements()
+}
 
 exports.createCart = async () => {
     const cart = await repository.insertElement();

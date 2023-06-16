@@ -2,11 +2,6 @@ const repository = require('../repositories/user')
 const {NotFoundError} = require('../mappers/custom.exception').errorMappers
 const {encryptPassword} = require("../utils/authentication");
 
-
-exports.readUsers = async () => {
-    return await repository.readElements();
-}
-
 exports.createUser = async (newUser) => {
     await repository.insertElement(newUser);
 }
@@ -43,4 +38,14 @@ exports.getUserById = async (userId) => {
         throw new NotFoundError("User not Found");
     }
     return user[0]
+}
+
+exports.readElements = async (limit, page, sortCritteria, itemName) => {
+    return !itemName ?
+        await repository.readElements(limit, page, sortCritteria) :
+        await repository.readElementsByName(limit, page, sortCritteria, itemName)
+}
+
+exports.countElements = async () => {
+    return await repository.countElements()
 }

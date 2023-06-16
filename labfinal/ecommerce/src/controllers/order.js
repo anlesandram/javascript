@@ -1,11 +1,16 @@
 const transaction = require('../transaction/order');
 const httpStatus = require('http-status-codes')
-const {StatusCodes} = httpStatus
+const pagination = require('../utils/pagination');
+const { StatusCodes } = httpStatus
 
 
-exports.getOrders = async (_, res, next) => {
-    const orders = await transaction.readOrders()
-    res.status(StatusCodes.OK).json(orders)
+exports.getOrders = async (req, res, next) => {
+    const { page = 1, limit = 100, sort = "asc", name } = req.query;
+
+    const orders = await pagination.calculatePagination(transaction, page, limit, sort, name)
+    return res
+        .status(StatusCodes.OK)
+        .json(orders)
 }
 
 exports.createOrder = async (req, res, next) => {
@@ -18,19 +23,13 @@ exports.createOrder = async (req, res, next) => {
 exports.deleteOrder = async (req, res, next) => {
     const { orderId } = req.params;
     const order = await transaction.deleteOrder(orderId);
-    
-    res.status(StatusCodes.OK).json( `Order ${order.id} was removed`)
-};
- 
-exports.getOrders = async (_, res, next) => {
-    const orders = await transaction.readOrders()
-    res.status(StatusCodes.OK).json(orders)
-}
 
+    res.status(StatusCodes.OK).json(`Order ${order.id} was removed`)
+};
 
 exports.getOrder = async (req, res, next) => {
     const { orderId } = req.params;
     const order = await transaction.getOrderByUserId(orderId, req.userId);
-    
+
     res.status(StatusCodes.OK).json(order)
 };

@@ -1,8 +1,14 @@
 const { Order } = require("./schemes/order")
 
-exports.readElements = async () => {
+exports.readElements = async (limit, page) => {
     return await Order.find()
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .exec();
+}
 
+exports.countElements = async () => {
+    return Order.count()
 }
 
 exports.readElement = async (idElement) => {
