@@ -1,4 +1,4 @@
-# Eccomerce
+# Ecomerce
 
 
 ## Run Application
