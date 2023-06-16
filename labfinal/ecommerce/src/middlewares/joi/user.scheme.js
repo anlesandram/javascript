@@ -7,3 +7,8 @@ exports.userBody = Joi.object({
   username: Joi.string().required(),
   password: Joi.string().required(),
 });
+
+exports.userUpdateBody = Joi.object({
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required()
+});

@@ -41,7 +41,12 @@ exports.insertElement = async (data) => {
 }
 
 exports.updateElement = async (data, id) => {
-    return await User.findByIdAndUpdate(id, data, { new: true })
+    return await User.findByIdAndUpdate(id,
+        {
+            firstName: data.firstName,
+            lastName: data.lastName
+        }
+    )
 }
 
 exports.deleteElement = async (idElement) => {

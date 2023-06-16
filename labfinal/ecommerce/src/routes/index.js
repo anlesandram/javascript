@@ -61,7 +61,7 @@ router.route(BASE_USERS)
 router.route(BASE_USERS + "/:userId")
     .get(isAuthGuest, userController.getUser)
     .delete([isAuthAdmin, middlewares.validateId(idScheme.idValidation, "userId")], userController.deleteUser)
-    .put([isAuthGuest, middlewares.validateId(idScheme.idValidation, "userId"), middlewares.validateBody(userScheme.userBody)], userController.updateUser)
+    .put([isAuthGuest, middlewares.validateId(idScheme.idValidation, "userId"), middlewares.validateBody(userScheme.userUpdateBody)], userController.updateUser)
 
 //carts
 router.route(BASE_CARTS)
