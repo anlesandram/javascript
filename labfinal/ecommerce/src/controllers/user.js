@@ -8,6 +8,11 @@ exports.getUsers = async (_, res, next) => {
     res.status(StatusCodes.OK).json(users)
 }
 
+exports.getUser = async (req, res, next) => {
+    const user = await transaction.getUserById(req.userId)
+    res.status(StatusCodes.OK).json(user)
+}
+
 exports.createUser = async (req, res, next) => {
     const body = req.body;
 

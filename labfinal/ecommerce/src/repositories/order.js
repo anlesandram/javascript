@@ -11,8 +11,15 @@ exports.readElement = async (idElement) => {
     })
 }
 
+exports.getOrderByUserId = async (idElement, userId) => {
+    return await Order.find({
+        _id: idElement,
+        userId : userId
+    })
+}
+
 exports.insertElement = async (data) => {
-    await new Order(data).save()
+    return await new Order(data).save()
 }
 
 

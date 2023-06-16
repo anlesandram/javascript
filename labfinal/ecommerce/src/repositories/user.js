@@ -11,7 +11,7 @@ exports.readElementUserId = async (userId) => {
 }
 
 exports.readElement = async (username, password) => {
-    return await Product.find({
+    return await User.find({
         username: username,
         password: password
     })

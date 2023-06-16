@@ -12,34 +12,35 @@ exports.createUser = async (newUser) => {
 }
 
 exports.modifyUser = async (newUser, userId) => {
-    const user = await repository.readElementUserId(userId);
-
-    if (!user) {
-        throw new NotFoundError("User not Found");
-    }
+    await this.getUserById(userId)
 
     const userUpdated = await repository.updateElement(newUser, userId);
     return userUpdated[1]
 
 }
 
+exports.deleteUser = async (userId) => {
+    await this.getUserById(userId)
+
+    repository.deleteElement(userId);
+    return user[0];
+}
+
 exports.getUser = async (username, password) => {
     const user = await repository.readElement(username, encryptPassword(password));
 
-    if (!user) {
+    if (!user[0]) {
         throw new NotFoundError("User not Found");
     }
-    return user
+    return user[0]
 
 }
 
-exports.deleteUser = async (userId) => {
+exports.getUserById = async (userId) => {
     const user = await repository.readElementUserId(userId);
 
-    if (!user) {
+    if (!user[0]) {
         throw new NotFoundError("User not Found");
     }
-
-    repository.deleteElement(userId);
-    return user;
+    return user[0]
 }

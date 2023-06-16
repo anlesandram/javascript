@@ -11,8 +11,8 @@ exports.getOrders = async (_, res, next) => {
 exports.createOrder = async (req, res, next) => {
     const body = req.body;
 
-    const order = await transaction.createOrder(body)
-    res.status(StatusCodes.OK).json(order)
+    const orderId = await transaction.createOrder(body, req.userId)
+    res.status(StatusCodes.OK).json(orderId)
 }
 
 exports.deleteOrder = async (req, res, next) => {
@@ -26,3 +26,11 @@ exports.getOrders = async (_, res, next) => {
     const orders = await transaction.readOrders()
     res.status(StatusCodes.OK).json(orders)
 }
+
+
+exports.getOrder = async (req, res, next) => {
+    const { orderId } = req.params;
+    const order = await transaction.getOrderByUserId(orderId, req.userId);
+    
+    res.status(StatusCodes.OK).json(order)
+};

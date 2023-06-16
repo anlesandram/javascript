@@ -12,7 +12,7 @@ exports.readElement = async (idElement) => {
 }
 
 exports.insertElement = async () => {
-    await new Cart().save()
+    return await new Cart().save()
 }
 
 exports.updateCartItems = async (cartId, item) => {

@@ -6,13 +6,14 @@ exports.readOrders = async () => {
     return await repository.readElements();
 }
 
-exports.createOrder = async (order) => {
+exports.createOrder = async (order, userId) => {
     //validate cart Id
     const cart = await cartTransaction.retrieveCart(order.cartId)
-
+    const items = cart.items
+    
     //calculate total price 
     let totalPrice = 0
-    cart.items.forEach(item => {
+    items.forEach(item => {
         totalPrice = item.totalPriceProduct + totalPrice
 
     });
@@ -20,12 +21,12 @@ exports.createOrder = async (order) => {
     const newOrder = {
         "cartId": order.cartId,
         "address": order.address,
-        "totalPrice": totalPrice
+        "totalPrice": totalPrice,
+        "items": items,
+        "userId": userId
     }
-
-    //TODO Identify Guest and update the order
-    
-    await repository.insertElement(newOrder);
+    const orderCreated = await repository.insertElement(newOrder);
+    return orderCreated._id.valueOf()
 }
 
 exports.deleteOrder = async (orderId) => {
@@ -45,5 +46,14 @@ exports.retrieveOrder = async (orderId) => {
     }
 
     return order[0]
+}
 
+exports.getOrderByUserId = async (orderId, userId) => {
+    const order = await repository.getOrderByUserId(orderId, userId);
+
+    if (order.length == 0) {
+        throw new NotFoundError("Order not Found");
+    }
+
+    return order[0]
 }

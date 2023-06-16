@@ -9,8 +9,8 @@ exports.getCarts = async (_, res, next) => {
 }
 
 exports.createCart = async (req, res, next) => {
-    const cart = await transaction.createCart()
-    res.status(StatusCodes.OK).json(cart)
+    const cartId = await transaction.createCart()
+    res.status(StatusCodes.OK).json(cartId)
 }
 
 exports.updateCartItems = async (req, res, next) => {
@@ -21,10 +21,16 @@ exports.updateCartItems = async (req, res, next) => {
     res.status(StatusCodes.OK).json(cart)
 }
 
-
 exports.deleteCart = async (req, res, next) => {
     const { cartId } = req.params;
     const cart = await transaction.deleteCart(cartId);
 
     res.status(StatusCodes.OK).json(`Cart ${cartId} was removed`)
+};
+
+exports.getCart = async (req, res, next) => {
+    const { cartId } = req.params;
+    const cart = await transaction.retrieveCart(cartId);
+
+    res.status(StatusCodes.OK).json(cart)
 };

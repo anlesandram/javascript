@@ -19,7 +19,7 @@ const start = async () => {
             useUnifiedTopology: true,
         })
 
-        moongose.set('debug', true);
+        //moongose.set('debug', true);
         app.listen(port, () => {
             console.log("running")
         })

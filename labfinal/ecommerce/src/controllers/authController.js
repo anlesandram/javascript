@@ -12,9 +12,8 @@ exports.login = async (req, res) => {
     process.env.JWT_SECRET_KEY,
     { expiresIn: "1d" }
   )
-    console.log(user)
-    console.log(user.username)
-  res.json({token, email: user.username, name: user.firstName}).status(StatusCodes.OK);
+  res.json({token, email: user.username, name: user.firstName})
+    .status(StatusCodes.OK);
 
 };
 

@@ -1,21 +1,24 @@
 const repository = require('../repositories/payment')
-const {NotFoundError} = require('../mappers/custom.exception').errorMappers
+const {ValidationError} = require('../mappers/custom.exception').errorMappers
 const transactionCart = require('../transaction/cart');
 const transactionOrder = require('../transaction/order');
 const transactionProduct = require('../transaction/product');
 
 
-exports.makePayment = async (payment) => {
+exports.makePayment = async (payment, userId) => {
     const orderId = payment.orderId
-    
 
     //validate if order exists
-    const order = await transactionOrder.retrieveOrder(orderId)
+    const order = await transactionOrder.getOrderByUserId(orderId, userId)
     const cartId = order.cartId
+
+    if(order.paymentId){
+        throw ValidationError("The order is paid")
+    }
     
     //make Payment
     const result = await repository.insertElement(payment);
-    const paymentId = result._id
+    const paymentId = result._id.valueOf()
 
 
     //update order payment Id 

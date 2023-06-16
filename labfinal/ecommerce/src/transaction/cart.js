@@ -39,7 +39,8 @@ exports.readCarts = async () => {
 
 
 exports.createCart = async () => {
-    await repository.insertElement();
+    const cart = await repository.insertElement();
+    return cart._id.valueOf()
 }
 
 exports.deleteCart = async (cartId) => {
@@ -50,8 +51,6 @@ exports.deleteCart = async (cartId) => {
 
 exports.retrieveCart = async (cartId) => {
     const cart = await repository.readElement(cartId);
-    console.log(cartId)
-
     if (cart.length == 0) {
         throw new NotFoundError("Cart not Found");
     }

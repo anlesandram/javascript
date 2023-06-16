@@ -6,6 +6,6 @@ const {StatusCodes} = httpStatus
 exports.makePayment = async (req, res, next) => {
     const body = req.body;
 
-    const payment = await transaction.makePayment(body)
-    res.status(StatusCodes.OK).json()
+    const paymentId = await transaction.makePayment(body, req.userId)
+    res.status(StatusCodes.OK).json(paymentId)
 }
