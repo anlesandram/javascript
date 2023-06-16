@@ -1,5 +1,4 @@
-# Ecomerce
-
+# Ecommerce
 
 ## Run Application
 
