@@ -12,7 +12,7 @@ The application is used to manage different products, create carts and orders
 
 ## Application guest flow
 
-<img src="/labFinal/ecommerce/assets/guest_flow.png"/>
+<img src="/labfinal/ecommerce/assets/guest_flow.png"/>
 
 ## Product endpoints 
 
