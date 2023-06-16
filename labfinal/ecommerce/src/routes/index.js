@@ -1,7 +1,8 @@
 const { Router } = require("express")
 const router = Router()
 const path = require("path");
-
+const httpStatus = require('http-status-codes')
+const { StatusCodes } = httpStatus
 
 //controllers
 const userController = require('../controllers/user')
@@ -13,7 +14,7 @@ const { login, restrictedView } = require("../controllers/authController")
 
 //middleware
 const middlewares = require('../middlewares/validations')
-const { isAuthAdmin, isAuthGuest} = require("../middlewares/handlers")
+const { isAuthAdmin, isAuthGuest } = require("../middlewares/handlers")
 
 //joi
 const productScheme = require('../middlewares/joi/product.scheme')
@@ -32,7 +33,11 @@ const BASE_PAYMENT = "/api/v1/payment"
 
 
 router
-    .get("/health", (_, res) => res.send("check"))
+    .get("/health", (_, res) => res
+        .status(StatusCodes.OK)
+        .json({
+            "status": "OK"
+        }))
 
 //login
 router
@@ -44,18 +49,19 @@ router.route(BASE_PRODUCTS)
     .post([isAuthAdmin, middlewares.validateBody(productScheme.productBody)], productController.createProduct)
 
 router.route(BASE_PRODUCTS + "/:productId")
+    .get(isAuthGuest, productController.retrieveProduct)
     .delete([isAuthAdmin, middlewares.validateId(idScheme.idValidation, "productId")], productController.deleteProduct)
-    .patch([isAuthAdmin, middlewares.validateId(idScheme.idValidation, "productId"), middlewares.validateBody(productScheme.productBody)], productController.updateProduct)
+    .put([isAuthAdmin, middlewares.validateId(idScheme.idValidation, "productId"), middlewares.validateBody(productScheme.productBody)], productController.updateProduct)
 
 //users
 router.route(BASE_USERS)
     .get(isAuthAdmin, userController.getUsers)
-    .get(isAuthGuest, userController.getUser)
     .post(middlewares.validateBody(userScheme.userBody), userController.createUser)
 
 router.route(BASE_USERS + "/:userId")
-    .delete(middlewares.validateId(idScheme.idValidation, "userId"), userController.deleteUser)
-    .patch([isAuthGuest, middlewares.validateId(idScheme.idValidation, "userId"), middlewares.validateBody(userScheme.userBody)], userController.updateUser)
+    .get(isAuthGuest, userController.getUser)
+    .delete([isAuthAdmin, middlewares.validateId(idScheme.idValidation, "userId")], userController.deleteUser)
+    .put([isAuthGuest, middlewares.validateId(idScheme.idValidation, "userId"), middlewares.validateBody(userScheme.userBody)], userController.updateUser)
 
 //carts
 router.route(BASE_CARTS)
@@ -73,13 +79,13 @@ router.route(BASE_ORDERS)
     .post([isAuthGuest, middlewares.validateBody(orderScheme.orderBody)], orderController.createOrder)
 
 router.route(BASE_ORDERS + "/:orderId")
-    .get([isAuthGuest, middlewares.validateId(idScheme.idValidation, "orderId")] ,orderController.getOrder)
-    .delete([isAuthAdmin, middlewares.validateId(idScheme.idValidation, "orderId")] ,orderController.deleteOrder)
+    .get([isAuthGuest, middlewares.validateId(idScheme.idValidation, "orderId")], orderController.getOrder)
+    .delete([isAuthAdmin, middlewares.validateId(idScheme.idValidation, "orderId")], orderController.deleteOrder)
 
 
- //payment
+//payment
 router.route(BASE_PAYMENT)
-    .post([isAuthGuest, middlewares.validateBody(paymentScheme.paymentBody)], paymentController.makePayment)   
+    .post([isAuthGuest, middlewares.validateBody(paymentScheme.paymentBody)], paymentController.makePayment)
 
 module.exports = router;
 

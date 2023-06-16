@@ -37,3 +37,10 @@ exports.deleteProduct = async (req, res, next) => {
 
     res.status(StatusCodes.OK).json(productRemoved)
 };
+
+exports.retrieveProduct = async (req, res, next) => {
+    const { productId } = req.params;
+    const product = await transaction.retrieveProduct(productId);
+    
+    res.status(StatusCodes.OK).json(product)
+};
